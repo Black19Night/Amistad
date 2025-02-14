@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín Especial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            background: url('https://saludconlupa.com/media/images/SanValentin.width-1920.jpg') center/cover;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .valentines-container {
+            position: relative;
+        }
+        
+        .heart {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            color: red;
+        }
+        .text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+        }
+        #card {
+            width: 90%;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.398);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin: 20px 0;
+        }
+
+        .cuadro-dialogo {
+            background: rgba(255, 255, 255, 0.412);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 400px;
+        }
+        .buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #btnSi {
+            background: #28a745;
+            color: white;
+        }
+        #btnNo {
+            background: #dc3545;
+            color: white;
+            position: relative;
+        }
+
+        /* Estilo para los GIFs que aparecerán en la pantalla */
+        .gif-corazon {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            animation: heartAnimation 12s ease-in-out forwards;
+            pointer-events: none; /* Para que no interfiera con otros elementos */
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                transform: scale(0) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1) translateY(-50px);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        #gifContainer img {
+            width: 70%;
+            border-radius: 20px;
+            margin-top: 15px;
+        }
+
+        img#xdxd {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 500px) {
+            .heart {
+                font-size: 40px;
+            }
+            .text {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="https://youtu.be/Bc7rMEKnzqc" type="audio/mpeg">
+    </audio>
+    <canvas id="heart"></canvas>
+    <div class="valentines-container">
+        <div class="valentines-day">
+            <div class="heart">❤️</div>
+            <div class="text">¡FELIZ DÍA DE<br>SAN VALENTÍN!</div>
+        </div>
+    </div> 
+    <div id="card">
+        <h2>🌷🌷🌷</h2>
+        <p>Para una Amiga Especial que le falta nutricion, Jazmin ❤️ </p>
+        <p>Eres una persona increíble y quiero recordarte lo especial que eres para mí aunque aveces te falle mucho y no seas pacifica. ¡Feliz San Valentín Amiga!  🫶</p>
+        <p>Con mucho cariño de tu Amigo,<br>Erick</p>
+    </div>
+    <div class="cuadro-dialogo" id="cuadroDialogo">
+        <h1>¿Vas a seguir siendo mi Amiga?,verdad?</h1>
+        <div id="gifContainer">
+            <img id="gifContainerImg" src="https://i.pinimg.com/originals/e3/b8/af/e3b8aff755429f303dc208532fd28ee2.gif">
+        </div>
+        <div class="buttons">
+            <button id="btnSi">Sí</button>
+            <button id="btnNo">No</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnSi = document.getElementById("btnSi");
+            const btnNo = document.getElementById("btnNo");
+            const gifContainerImg = document.getElementById("gifContainerImg");
+
+            btnSi.addEventListener("click", () => {
+                Swal.fire({
+                    title: "YA VES QUE SI QUIERES",
+                    text: "Te dije que si me acorde de este dia amiga puro hueso",
+                });
+
+                // Crear varios GIFs de corazones aleatorios en la pantalla
+                for (let i = 0; i < 100; i++) {
+                    let gif = document.createElement('img');
+                    gif.src = "https://img.itch.zone/aW1nLzExNDEyNjg1LmdpZg==/original/ftZVfX.gif";
+                    gif.classList.add('gif-corazon');
+
+                    // Posición aleatoria en la pantalla
+                    gif.style.top = Math.random() * window.innerHeight + 'px';
+                    gif.style.left = Math.random() * window.innerWidth + 'px';
+
+                    // Añadir el gif al body
+                    document.body.appendChild(gif);
+
+                    // Eliminar el gif después de la animación
+                    setTimeout(() => {
+                        gif.remove();
+                    }, 12000); // Después de 3 segundos, se elimina
+                }
+            });
+
+            btnNo.addEventListener("mouseover", () => {
+                btnNo.style.position = "absolute";
+                btnNo.style.top = Math.random() * window.innerHeight + "px";
+                btnNo.style.left = Math.random() * window.innerWidth + "px";
+            });
+        });
+    </script>
+</body>
+</html>
